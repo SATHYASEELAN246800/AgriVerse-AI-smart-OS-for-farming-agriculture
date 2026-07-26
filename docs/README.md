@@ -1,7 +1,6 @@
 # AgriVerse AI — Enterprise Smart Agriculture Operating System
 
 # AgriVerse AI — Verified Production Launch & Setup Guide
-# AgriVerse AI — Verified Production Launch & Setup Guide
 
 > **Important Note**: This document was generated exclusively by conducting a full static audit of the actual codebase, `package.json`, `vite.config.js`, `server/run_server.py`, `server/main.py`, and Python model managers. No unverified or generic commands have been included.
 
