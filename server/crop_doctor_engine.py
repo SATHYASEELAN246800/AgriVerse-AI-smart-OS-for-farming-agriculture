@@ -10,16 +10,22 @@ from typing import Dict, Any, List, Optional
 import urllib.request
 import urllib.error
 
-MODEL_BASE_DIR = r"D:\mini project learning\agriculture AI\agriculture model for AI crop doctor tab"
-OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+try:
+    from server.config import CROP_DOCTOR_MODELS_PATH, OLLAMA_URL, MODEL_SUBDIRS
+    MODEL_BASE_DIR = str(CROP_DOCTOR_MODELS_PATH)
+except ImportError:
+    # Fallback to relative paths if config not available
+    from pathlib import Path
+    MODEL_BASE_DIR = str(Path(__file__).parent.parent / 'agriculture model for AI crop doctor tab')
+    OLLAMA_URL = os.getenv('OLLAMA_URL', 'http://127.0.0.1:11434/api/generate')
 
 MODEL_PATHS = {
-    "vit": os.path.join(MODEL_BASE_DIR, r"classifiers\vit"),
-    "efficientnet": os.path.join(MODEL_BASE_DIR, r"classifiers\efficientnet"),
-    "mobilenet": os.path.join(MODEL_BASE_DIR, r"classifiers\mobilenet"),
-    "clip": os.path.join(MODEL_BASE_DIR, r"classifiers\clip"),
-    "tomato": os.path.join(MODEL_BASE_DIR, r"classifiers\tomato"),
-    "yolo": os.path.join(MODEL_BASE_DIR, r"detection\yolo")
+    "vit": os.path.join(MODEL_BASE_DIR, "classifiers", "vit"),
+    "efficientnet": os.path.join(MODEL_BASE_DIR, "classifiers", "efficientnet"),
+    "mobilenet": os.path.join(MODEL_BASE_DIR, "classifiers", "mobilenet"),
+    "clip": os.path.join(MODEL_BASE_DIR, "classifiers", "clip"),
+    "tomato": os.path.join(MODEL_BASE_DIR, "classifiers", "tomato"),
+    "yolo": os.path.join(MODEL_BASE_DIR, "detection", "yolo")
 }
 
 # Universal Comprehensive Crop & Disease RAG Store (15 Crop Categories)

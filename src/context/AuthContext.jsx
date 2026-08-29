@@ -2,6 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
+// Load default values from environment or use generic defaults
+const DEFAULT_USER_EMAIL = import.meta.env.VITE_DEFAULT_USER_EMAIL || 'farmer@agriverse.local';
+const DEFAULT_USER_NAME = import.meta.env.VITE_DEFAULT_USER_NAME || 'AgriVerse Farmer';
+const DEFAULT_FARM_LOCATION = import.meta.env.VITE_DEFAULT_FARM_LOCATION || 'Tamil Nadu, India';
+const DEFAULT_FARM_SIZE = import.meta.env.VITE_DEFAULT_FARM_SIZE || '10.0 Acres';
+const DEFAULT_PROFILE_PHOTO = '/avatar-placeholder.jpg';
+
 export const AuthProvider = ({ children }) => {
   // Check cached active session from localStorage
   const [user, setUser] = useState(() => {
@@ -9,10 +16,6 @@ export const AuthProvider = ({ children }) => {
       const cached = localStorage.getItem('agriverse_auth_user');
       if (cached) {
         const parsed = JSON.parse(cached);
-        if (parsed.email === 'sathya.seelan@gmail.com') {
-          parsed.email = 'sathyaseelan6381@gmail.com';
-          localStorage.setItem('agriverse_auth_user', JSON.stringify(parsed));
-        }
         return parsed;
       }
     } catch (e) {
@@ -67,14 +70,14 @@ export const AuthProvider = ({ children }) => {
           displayName: payload.name || payload.given_name || payload.email.split('@')[0],
           fullName: payload.name || payload.email.split('@')[0],
           email: payload.email,
-          photoUrl: payload.picture || `https://unavatar.io/${payload.email}?fallback=https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120`,
+          photoUrl: payload.picture || `https://unavatar.io/${payload.email}?fallback=${DEFAULT_PROFILE_PHOTO}`,
           provider: 'Google OAuth 2.0 (Verified)',
           role: 'Farmer / Enterprise Agronomist',
           title: 'Enterprise Farmer',
           badge: '👑 Elite Tier',
           subscriptionTier: 'Elite SaaS Tier',
-          farmLocation: 'Tamil Nadu, India',
-          farmSize: '10.0 Acres',
+          farmLocation: DEFAULT_FARM_LOCATION,
+          farmSize: DEFAULT_FARM_SIZE,
           cropPrimary: 'Paddy & Commercial Crops',
           aiTokens: '100,000 / 100,000',
           lastLogin: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -88,20 +91,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Google OAuth Sign In / Custom Gmail Authentication
-  const googleLogin = (customGmail = null, customName = null) => {
-    const emailToUse = customGmail && customGmail.includes('@') 
-      ? customGmail 
-      : 'sathyaseelan6381@gmail.com';
+  // Google OAuth Sign In / Custom Email Authentication
+  const googleLogin = (customEmail = null, customName = null) => {
+    const emailToUse = customEmail && customEmail.includes('@') 
+      ? customEmail 
+      : DEFAULT_USER_EMAIL;
 
     const namePart = emailToUse.split('@')[0];
     const defaultFormattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1).replace(/\./g, ' ');
     const finalName = customName || defaultFormattedName;
 
-    const isSathya = emailToUse.toLowerCase().includes('sathya') || finalName.toLowerCase().includes('sathya');
-    const profilePhoto = isSathya 
-      ? '/sathyaseelan_profile.jpg' 
-      : `https://unavatar.io/${emailToUse}?fallback=/sathyaseelan_profile.jpg`;
+    const profilePhoto = `https://unavatar.io/${emailToUse}?fallback=${DEFAULT_PROFILE_PHOTO}`;
 
     const updatedUser = {
       id: `usr_g_${Date.now()}`,
@@ -114,8 +114,8 @@ export const AuthProvider = ({ children }) => {
       title: 'Enterprise Farmer',
       badge: '👑 Elite Tier',
       subscriptionTier: 'Elite SaaS Tier',
-      farmLocation: 'Vellore, Tamil Nadu',
-      farmSize: '12.45 Acres',
+      farmLocation: DEFAULT_FARM_LOCATION,
+      farmSize: DEFAULT_FARM_SIZE,
       cropPrimary: 'Paddy (Rice - ADT 54)',
       aiTokens: '95,000 / 100,000',
       lastLogin: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -140,14 +140,14 @@ export const AuthProvider = ({ children }) => {
       displayName: finalName,
       fullName: finalName,
       email: email,
-      photoUrl: `https://unavatar.io/${email}?fallback=https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=120`,
+      photoUrl: `https://unavatar.io/${email}?fallback=${DEFAULT_PROFILE_PHOTO}`,
       provider: 'Email OAuth 2.0',
       role: 'Farmer / Enterprise Agronomist',
       title: 'Enterprise Agronomist',
       badge: '👑 Elite Tier',
       subscriptionTier: 'Elite SaaS Tier',
-      farmLocation: 'Tamil Nadu, India',
-      farmSize: '10.0 Acres',
+      farmLocation: DEFAULT_FARM_LOCATION,
+      farmSize: DEFAULT_FARM_SIZE,
       cropPrimary: 'Paddy (Rice - ADT 54)',
       aiTokens: '100,000 / 100,000',
       lastLogin: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
