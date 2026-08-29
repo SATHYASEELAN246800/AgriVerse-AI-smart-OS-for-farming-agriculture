@@ -1,0 +1,149 @@
+# ============================================
+# ENVIRONMENT & CONFIGURATION
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+
+# ============================================
+# NODE.JS / FRONTEND
+# ============================================
+node_modules/
+dist/
+build/
+.vite/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# PYTHON / BACKEND
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============================================
+# IDE & EDITOR
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# DATABASE FILES (LOCAL DEVELOPMENT)
+# ============================================
+data/
+databases/
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# ============================================
+# MODEL & CACHE FILES (LOCAL STORAGE)
+# ============================================
+models/
+agriculture\ model\ for\ AI\ crop\ doctor\ tab/
+huggingface/
+cache/
+*.pth
+*.bin
+*.pt
+*.onnx
+*.pb
+
+# ============================================
+# LOGS & TEMPORARY FILES
+# ============================================
+logs/
+*.log
+*.tmp
+temp/
+tmp/
+
+# ============================================
+# OS SPECIFIC
+# ============================================
+.DS_Store
+Thumbs.db
+.env.bak
+.env.local.bak
+
+# ============================================
+# PROJECT SPECIFIC
+# ============================================
+agriculture model for AI crop doctor tab/
+models/huggingface/
+public/sathyaseelan_profile.jpg
+err.txt
+err2.txt
+error_msg.txt
+tb_utf8.txt
+traceback.log
+
+# ============================================
+# SENSITIVE DATA
+# ============================================
+*.key
+*.pem
+*.pub
+secrets.json
+credentials.json
+config.prod.json
+
+# ============================================
+# BUILD ARTIFACTS
+# ============================================
+.next/
+out/
+.nuxt/
+dist/
+.cache/
+.vuepress/dist/
+
+# ============================================
+# VITE
+# ============================================
+.vite/
+.cache/
+dist/
+*.tsbuildinfo
